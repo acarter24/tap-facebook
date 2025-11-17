@@ -185,7 +185,8 @@ class AdsInsightStream(Stream):
             if status == "Job Completed":
                 return job
             if status == "Job Failed":
-                raise RuntimeError(dict(job))
+                msg = f"Insights job Failed - Details: {dict(job)}"
+                raise RuntimeError(msg)
             if duration > INSIGHTS_MAX_WAIT_TO_START_SECONDS and percent_complete == 0:
                 error_message = (
                     f"Insights job {job_id} did not start after "
